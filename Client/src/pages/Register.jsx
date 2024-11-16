@@ -2,6 +2,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
+import GoogleLogin from "../components/login-registration/GoogleLogin";
 
 const Register = () => {
   const { CreateUser } = useAuth();
@@ -16,6 +17,7 @@ const Register = () => {
   const onSubmit = (data) => {
     CreateUser(data.email, data.password)
     navigate("/")
+    // console.log(data);
   };
 
   return (
@@ -79,12 +81,21 @@ const Register = () => {
                 {errors.confirmPassword && (
                   <p className='text-red-500'>Both passwords must match</p>
                 )}
+              </div>
 
+              <div className='form-control'>
                 <label className='label'>
-                  <Link to='/login' className='label-text-alt link link-hover '>
-                    Already have an account?
-                  </Link>
+                  <span className='label-text'>Select Role</span>
                 </label>
+                <select
+                  className='select select-bordered w-full max-w-xs'
+                  {...register("role", { required: true })}>
+                  <option value='buyer'>Buyer</option>
+                  <option value='seller'>Seller</option>
+                </select>
+                {errors.role && (
+                  <p className='text-red-600'>You must select a role</p>
+                )}
               </div>
               <div className='form-control mt-6'>
                 <button type='submit' className='btn btn-primary'>
@@ -92,6 +103,14 @@ const Register = () => {
                 </button>
               </div>
             </form>
+            <div>
+              <GoogleLogin></GoogleLogin>
+            </div>
+            <label className='label'>
+              <Link to='/login' className='text-center '>
+                Already have an account?
+              </Link>
+            </label>
           </div>
         </div>
       </div>

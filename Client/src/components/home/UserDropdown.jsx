@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 
 
@@ -25,7 +25,7 @@ const UserDropdown = () => {
         tabIndex={0}
         className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
         <li>
-          <Link>Dashboard</Link>
+          <NavLink>Dashboard</NavLink>
         </li>
         <li>
           <button onClick={handleLogout}>Logout</button>
