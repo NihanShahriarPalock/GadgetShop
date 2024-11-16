@@ -1,21 +1,20 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useForm } from "react-hook-form";
-
 
 const Login = () => {
   const { Login } = useAuth();
   const navigate = useNavigate();
-    const {
-      register,
-      handleSubmit,
-      formState: { errors },
-    } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    const onSubmit = (data) => {
-      Login(data.email, data.password)
-      navigate("/")
-    };
+  const onSubmit = (data) => {
+    Login(data.email, data.password);
+    navigate("/");
+  };
   return (
     <div className='hero bg-base-200 min-h-screen'>
       <div className='hero-content flex-col lg:flex-row-reverse'>
@@ -64,6 +63,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;
