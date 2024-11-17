@@ -21,10 +21,37 @@ const client = new MongoClient(url, {
     },
 });
 
+const userCollection = client.db("gadgetShop").collection("users")
+const productCollection = client.db("gadgetShop").collection("products")
+
 const dbConnect = async () => {
     try {
         await client.connect();
         console.log("Successfully connected to MongoDB");
+
+        // insert user 
+        app.post("/users", async (req, res) => {
+            const user = req.body;
+            const query = { email: user.email };
+            const existingUser = await userCollection.findOne(query);
+
+            if (existingUser) {
+                return res.send({ message: "User already exists" });
+            }
+            const result = await userCollection.insertOne(user);
+            res.send(result);
+        });
+
+
+
+
+
+
+
+
+
+
+
     } catch (error) {
         console.log("Error connecting to MongoDB", error.message);
     }
@@ -41,7 +68,7 @@ app.get("/", (req, res) => {
 app.post('/authentication', async (req, res) => {
     const userEmail = req.body
     const token = jwt.sign(userEmail, process.env.ACCESS_KEY_TOKEN, { expiresIn: '10d' })
-    res.send({token})
+    res.send({ token })
 })
 
 app.listen(port, () => {
