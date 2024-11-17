@@ -25,7 +25,7 @@ const UserDropdown = () => {
         tabIndex={0}
         className='dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow'>
         <li>
-          <NavLink>Dashboard</NavLink>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </li>
         <li>
           <button onClick={handleLogout}>Logout</button>
