@@ -9,6 +9,9 @@ import Register from "../pages/Register";
 import DashboardLayout from "../layout/DashboardLayout";
 import PrivateRoute from "./private/PrivateRoute";
 import Overview from "../pages/dashboard/Overview";
+import SellerRoute from "./private/SellerRoute";
+import MyProducts from "../pages/dashboard/seller/MyProducts";
+import AddProducts from "../pages/dashboard/seller/AddProducts";
 
 export const router = createBrowserRouter([
   {
@@ -51,11 +54,24 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard/overview",
-        element:<Overview></Overview>
+        element: <Overview></Overview>,
       },
       {
-        
-      }
+        path: "/dashboard/my-products",
+        element: (
+          <SellerRoute>
+            <MyProducts></MyProducts>
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "/dashboard/add-products",
+        element: (
+          <SellerRoute>
+            <AddProducts></AddProducts>
+          </SellerRoute>
+        ),
+      },
     ],
   },
 ]);
